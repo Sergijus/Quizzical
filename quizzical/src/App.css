@@ -1,6 +1,8 @@
 :root {
   --primary: #293264;
+  --primary-30: #2932644d;
   --secondary: #4d5b9e;
+  --secondary-30: #4d5b9e4d;
   --active: #d6dbf5;
   --correct: #94d7a2;
   --incorrect: #f8bcbc;
@@ -49,16 +51,21 @@ h2 {
   text-align: start;
 }
 .result-container {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.result-container h2 {
+  margin-bottom: 0;
+  margin-top: 32px;
+}
 .button {
   border: none;
   background-color: var(--secondary);
   padding: 12px 24px;
-  margin-top: 32px;
+  margin-top: 16px;
   align-self: center;
 }
 .button:hover {
@@ -67,6 +74,24 @@ h2 {
 
 .button:active {
   box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+.button.reset {
+  animation: pulse 2s ease-in-out infinite;
+  -webkit-animation: pulse 2s ease-in-out infinite;
+
+  box-shadow: 0 0 0 0 var(--secondary-30);
+}
+
+@-webkit-keyframes pulse {
+  0% {
+  }
+  70% {
+    box-shadow: 0 0 0 8px var(--secondary-30);
+  }
+  100% {
+    box-shadow: 0 0 0 0 var(--secondary-30);
+  }
 }
 
 .answers-container {
