@@ -2,7 +2,6 @@ import React from "react";
 import Answer from "./Answer";
 
 export default function Question(props) {
-  //   console.log(props.id);
   const shuffledAnswers = React.useMemo(() => {
     let allAnswers = [...props.incorrectAnswers, props.correctAnswer];
     return allAnswers
@@ -15,16 +14,20 @@ export default function Question(props) {
     <div className="question">
       <h2>{props.question}</h2>
       <div className="answers-container">
-        {shuffledAnswers.map((a) => {
-          return (
-            <Answer
-              key={a}
-              answer={a}
-              isSelected={props.selectedAnswer === a}
-              onSelect={() => props.onAnswerSelect(props.id, a)}
-            />
-          );
-        })}
+        {shuffledAnswers.map((a) => (
+          <Answer
+            key={a}
+            answer={a}
+            isSelected={props.selectedAnswer === a}
+            isCorrect={a === props.correctAnswer}
+            isWrong={
+              props.selectedAnswer === a &&
+              props.selectedAnswer !== props.correctAnswer
+            }
+            showResults={props.showResults} // Use this to trigger color change
+            onSelect={() => props.onAnswerSelect(props.id, a)}
+          />
+        ))}
       </div>
     </div>
   );

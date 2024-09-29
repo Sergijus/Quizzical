@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Question from "./components/Question";
 import data from "./dataSample.js";
@@ -13,6 +13,8 @@ export default function App() {
     }))
   );
   const [selectedAnswers, setSelectedAnswers] = React.useState({});
+  const [correctCount, setCorrectCount] = useState(null); // Track number of correct answers
+  const [showResults, setShowResults] = useState(false); // To trigger the check
 
   // React.useEffect(() => {
   //   fetch(
@@ -32,6 +34,19 @@ export default function App() {
     }));
   };
 
+  const checkAnswers = () => {
+    let count = 0;
+
+    questions.forEach((q) => {
+      if (selectedAnswers[q.id] === decode(q.correct_answer)) {
+        count++;
+      }
+    });
+
+    setCorrectCount(count); // Set the correct count
+    setShowResults(true); // Trigger results display and color change
+  };
+
   const allQuestions = questions.map((q) => {
     return (
       <Question
@@ -42,6 +57,7 @@ export default function App() {
         onAnswerSelect={handleAnswerSelect}
         selectedAnswer={selectedAnswers[q.id]} // Track the selected answer by question ID
         id={q.id} // Pass unique ID
+        showResults={showResults} // Pass the state to trigger color change
       />
     );
   });
@@ -50,7 +66,16 @@ export default function App() {
     <>
       <main>
         {allQuestions}
-        <button className="button">Check answers</button>
+        <div className="result-container">
+          {correctCount !== null && (
+            <h2>
+              You got {correctCount} out of {questions.length} correct!
+            </h2>
+          )}
+        </div>
+        <button className="button" onClick={checkAnswers}>
+          Check answers
+        </button>
       </main>
     </>
   );

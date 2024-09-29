@@ -42,6 +42,17 @@ main:before {
   left: 0px;
   overflow: hidden;
 }
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+  text-align: start;
+}
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .button {
   border: none;
@@ -56,15 +67,6 @@ main:before {
 
 .button:active {
   box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
-}
-
-.question {
-}
-.question > h2 {
-  font-size: 20px;
-  font-weight: bold;
-  color: var(--primary);
-  text-align: start;
 }
 
 .answers-container {
@@ -91,4 +93,13 @@ main:before {
 .answer.selected {
   background-color: var(--active);
   border-color: var(--active);
+}
+
+.answer.correct {
+  background-color: var(--correct);
+  border-color: var(--correct);
+}
+.answer.wrong {
+  background-color: var(--incorrect);
+  border-color: var(--incorrect);
 }
