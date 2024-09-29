@@ -88,3 +88,7 @@ main:before {
   min-width: 64px;
   font-weight: medium;
 }
+.answer.selected {
+  background-color: var(--active);
+  border-color: var(--active);
+}
